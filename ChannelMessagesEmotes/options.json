@@ -1,0 +1,111 @@
+{ 
+  "apiLink":{
+    "type": "string",
+    "label": "Api chat link",
+    "value": ""
+  },
+  "eventsLimit": {
+    "type": "number",
+    "label": "Limit displayed events to:",
+    "value": 6
+  },
+  "toggleTopLists": {
+    "type": "checkbox",
+    "label": "Toggle Messages / Emotes"
+  },
+  "delay":{
+      "type": "number",
+      "label": "Delay of toggling between emotes / messages",
+      "value": 10000
+    },
+  "whatShow": {
+    "type": "dropdown",
+    "label": "Limit displayed events to:",
+        "value": "chatstats",
+    "options": {
+      "chatstats": "chatstats",
+      "emotes": "emotes"
+    	}
+    },
+  "msgTitle":{
+      "type":"string",
+      "label":"Title of messages amount",
+      "value":"Top chatters"
+  },
+  "emoteTitle":{
+      "type":"string",
+      "label":"Title of emotes amount",
+      "value":"Top emotes"
+  }, 
+    "emoteSize":{
+        "type": "dropdown",
+    "label": "Size of emotes:",
+        "value": "2",
+    "options": {
+      "1": "1",
+      "2":"2",
+      "4": "4"
+    	}
+  },
+  "userName": {
+    "type": "string",
+    "label": "User name in ranking" ,
+    "value": "User"
+  },
+  "messageAmount": {
+    "type": "string",
+    "label": "Message amount name in ranking" ,
+    "value": "Amount"
+  },
+  "emoteName": {
+    "type": "string",
+    "label": "Emote name in ranking" ,
+    "value": "Emote"
+  },
+  "emoteAmmount": {
+    "type": "string",
+    "label": "Emote amount name in ranking" ,
+    "value": "Amount"
+  },
+  "fontColor": {
+    "type": "colorpicker",
+    "label": "Font color",
+    "value": "rgb(255, 255, 255)"
+  },
+  "theme": {
+    "type": "dropdown",
+    "label": "Background pattern:",
+    "value": "texture",
+    "options": {
+      "texture": "texture",
+      "diagonal-stripes": "Diagonal stripes",
+      "hexagons": "Hexagons",
+      "i-like-food": "I like food",
+      "tiny-checkers": "Tiny checkers",
+      "circuit-board": "Circuit board"
+    }
+  },
+  "heightEventContainer":{
+     "type": "number",
+   	 "label": "Height event container",
+   	 "value": 50
+	},
+  "backgroundOpacity": {
+    "type": "number",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "label": "Texture opacity",
+    "value": 50
+  },
+  "backgroundColor": {
+    "type": "colorpicker",
+    "label": "Background color",
+    "value": "rgba(36, 6, 73, 0.15)"
+  },
+  "iconColor": {
+    "type": "colorpicker",
+    "label": "Icon Color",
+    "value": "rgb(255, 255, 255, 255)"
+  }
+}
