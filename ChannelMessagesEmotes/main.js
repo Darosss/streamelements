@@ -11,7 +11,7 @@ let EVENTS_LIMIT=12,
     EMOTEHEAD = ["User", "Messages"],
     CHATSTATS_NAME = "chatstats",
     EMOTES_NAME = 'emotes',
-	  API_LINK = '';	
+    API_LINK = '';	
 
 class getAPI{
     constructor(api_link) {
@@ -78,7 +78,7 @@ class MessagesEmotes{
   static addEvent(type, username, text, headField=false) {
     let element;
   	let place_div = ``;
-  	if(headField){place_div = `<div class="event-image place-${type}"></div>`;}
+  	if(!headField){place_div = `<div class="event-image place-${type}"></div>`;}
     element = `
       <div class="event-container" id="event">
         <div class="backgroundsvg"></div> 
@@ -133,8 +133,8 @@ window.addEventListener('onWidgetLoad', function (obj) {
     MSG_TITLE = fieldData.msgTitle;
     EMOTE_TITLE = fieldData.emoteTitle;
     DELAY = fieldData.delay;
-    TOGGLE_TOP_LISTS = fieldData.toggleTopLists;
-    EMOTE_SIZE=fieldData.emoteSize;
+  	TOGGLE_TOP_LISTS = fieldData.toggleTopLists;
+  	EMOTE_SIZE=fieldData.emoteSize;
     $("#titleHead").html(titleHead);
     API_LINK = fieldData.apiLink;
   	let api = new getAPI(API_LINK);
