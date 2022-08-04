@@ -1,17 +1,17 @@
 let EVENTS_LIMIT=12,
 
-	WHAT_SHOW="",
+    WHAT_SHOW="",
     MSG_TITLE="",
-	EMOTE_TITLE="",
+    EMOTE_TITLE="",
     DELAY=10000,
-	TOGGLE_TOP_LISTS,
-	EMOTE_SIZE,
+    TOGGLE_TOP_LISTS,
+    EMOTE_SIZE,
     PLACE_ARR = ["first", "second", "third"],
     MSGHEAD = ["User", "Messages"],
     EMOTEHEAD = ["User", "Messages"],
     CHATSTATS_NAME = "chatstats",
     EMOTES_NAME = 'emotes',
-	API_LINK = '';	
+	  API_LINK = '';	
 
 class getAPI{
     constructor(api_link) {
@@ -133,10 +133,10 @@ window.addEventListener('onWidgetLoad', function (obj) {
     MSG_TITLE = fieldData.msgTitle;
     EMOTE_TITLE = fieldData.emoteTitle;
     DELAY = fieldData.delay;
-  	TOGGLE_TOP_LISTS = fieldData.toggleTopLists;
-  	EMOTE_SIZE=fieldData.emoteSize;
-	$("#titleHead").html(titleHead);
-	API_LINK = fieldData.apiLink;
+    TOGGLE_TOP_LISTS = fieldData.toggleTopLists;
+    EMOTE_SIZE=fieldData.emoteSize;
+    $("#titleHead").html(titleHead);
+    API_LINK = fieldData.apiLink;
   	let api = new getAPI(API_LINK);
     api.fetch(EVENTS_LIMIT);
     let topEmotes = api.getTopEmotes();
