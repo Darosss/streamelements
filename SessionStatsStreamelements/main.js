@@ -27,57 +27,68 @@ class SessionStats {
       ", "
     )}</div>`;
   }
-  static addEvent(type, username, text, headField = false) {
+  static addEvent(type, username, text, headField = false, msgAmount = 0) {
     let element;
     let place_div = ``;
+    if (msgAmount > 0) {
+      place_div = `<div class="event-image">${msgAmount}</div>`;
+    }
     if (!headField) {
       place_div = `<div class="event-image place-${type}"></div>`;
     }
     element = `
-    <div class="event-container" id="event">
-      <div class="backgroundsvg"></div> 
-      ${place_div}
-      <div class="username-container">${username}</div>
-      <div class="details-container">${text}</div>
-    </div>
-    `;
+        <div class="event-container" id="event">
+          <div class="backgroundsvg"></div> 
+          ${place_div}
+          <div class="username-container">${username}</div>
+          <div class="details-container">${text}</div>
+        </div>
+        `;
 
     $(".main-container").removeClass("fadeOutClass").show().append(element);
   }
-  static conditionArray(arr, limit) {
+  static conditionArray(arr, limit, name, amount) {
     arr.sort((a, b) => b.amount - a.amount);
     if (limit > arr.length) {
       limit = arr.length;
     }
     if (arr.length <= 0) return;
+    let sumMsg = 0;
+    for (let i = 0; i < arr.length; i++) {
+      sumMsg += arr[i].amount;
+    }
+    SessionStats.addEvent("", name, amount, true, sumMsg);
     for (let i = 0; i < limit; i++) {
-      SessionStats.addEvent(PLACE_ARR[i], arr[i].name, arr[i].amount);
+      var percentMsg = Math.floor((arr[i].amount / sumMsg) * 100);
+      SessionStats.addEvent(
+        PLACE_ARR[i],
+        arr[i].name,
+        arr[i].amount + `(${percentMsg}%)`
+      );
     }
   }
   showMessages(arr, limit) {
     $(".main-container").empty();
     $("#titleHead").text(this.chatters);
-    SessionStats.addEvent("", MSGHEAD[0], MSGHEAD[1], true);
+
     setTimeout(function () {
-      SessionStats.conditionArray(arr, limit);
+      SessionStats.conditionArray(arr, limit, MSGHEAD[0], MSGHEAD[1]);
     }, this.delay);
     //timeout only because api is too slow or i dont know, without delay it's broken
   }
   showEmotes(arr, limit) {
     $(".main-container").empty();
     $("#titleHead").text(this.emotes);
-    SessionStats.addEvent("", EMOTEHEAD[0], EMOTEHEAD[1], true);
     setTimeout(function () {
-      SessionStats.conditionArray(arr, limit);
+      SessionStats.conditionArray(arr, limit, EMOTEHEAD[0], EMOTEHEAD[1]);
     }, this.delay);
   }
   showWords(arr, limit) {
     $(".main-container").empty();
     $("#titleHead").empty();
     $("#titleHead").append(this.words);
-    SessionStats.addEvent("", WORDSHEAD[0], WORDSHEAD[1], true);
     setTimeout(function () {
-      SessionStats.conditionArray(arr, limit);
+      SessionStats.conditionArray(arr, limit, WORDSHEAD[0], WORDSHEAD[1]);
     }, this.delay);
   }
   //timeout only because api is too slow or i dont know, without delay it's broken
@@ -162,7 +173,6 @@ window.addEventListener("onWidgetLoad", function (obj) {
   sliceArrayPhrasesToLimit();
   const stats = new SessionStats();
   setInterval(function () {
-    console.log(WHAT_SHOW);
     if (WHAT_SHOW == CHAT_SESSION) {
       WHAT_SHOW = EMOTES_SESSION;
       stats.showMessages(MESSAGES_ARRAY, EVENTS_LIMIT);
